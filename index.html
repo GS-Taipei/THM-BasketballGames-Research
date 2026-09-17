@@ -741,42 +741,43 @@
     <div class="chart-box tall">
       <h4>📈 台港澳籃球手遊品類｜市場規模趨勢（2014-2026）<span class="data-tag">Sensor Tower估算</span></h4>
       <canvas id="marketSizeChart" style="height:400px;"></canvas>
+    <p>五個尖峰一次比一次小——2020年暴增到$850萬，之後2023年電影只衝$200萬，2024年兩款新遊戲各衝$300-400萬，2025年底更只剩$200萬，邊際效果明顯遞減。更關鍵的是2026年線型持續下滑，逼近2020年以前的水準。</p>
     </div>
 
-    <h3 style="font-size:1.1rem;margin:30px 0 10px;">📉 4.2　完整生命週期總表：所有已知遊戲的營運時長</h3>
-    <p>把清單裡所有已知遊戲（無論已關服或仍在營運）的營運時長都列出來，仍在營運的以「至今2026/09」為終點計算：</p>
+    <h3 style="font-size:1.1rem;margin:30px 0 10px;">📉 4.2　生命週期：所有已知遊戲的營運時長</h3>
+    <p>整理所有已知遊戲（無論已關服或仍在營運）的營運時長，仍在營運的以至今2026/09為終點計算：</p>
     <div class="chart-box tall">
-      <h4>各遊戲營運時長（月）——橘色已關服，藍色營運中</h4>
+      <h4>各遊戲營運時長(月)——橘色已死 / 藍色營運中</h4>
       <canvas id="fullLifespanChart" style="height:520px;"></canvas>
     </div>
     <div class="stat-strip">
-      <div class="stat-chip"><div class="n">5-6款</div><div class="t">2020年後同期競爭的3v3街籃手遊</div></div>
-      <div class="stat-chip"><div class="n">1-4年</div><div class="t">已關服作品的平均壽命</div></div>
+      <div class="stat-chip"><div class="n">16款</div><div class="t">2020年後推出的籃球手遊</div></div>
+      <div class="stat-chip"><div class="n">29.9個月</div><div class="t">此16款新品的平均壽命(其中12款仍在營運中)</div></div>
     </div>
     <div class="callout blue">
       <div class="icon">🔬</div>
-      <p><strong>待驗證假設：</strong>街籃品類已進入過度飽和階段，建議用「每年新上線街籃遊戲數量」對「每款平均壽命」做時間序列分析驗證。</p>
+      <p><strong>有趣重點：</strong>產品壽命明顯縮短、每次新事件帶動的市場規模漲幅也明顯縮小，但新品上市頻率反而在加快(2026年1月至9月已上市4款籃球手遊)——市場「還沒死」，但維持這個「還沒死」的代價，是廠商必須更高頻率推出新品，才能撐住總盤子不垮。對新進場者而言，這是紅海訊號，不是利多。</p>
     </div>
 
-    <h3 style="font-size:1.1rem;margin:30px 0 10px;">📊 4.3　14款遊戲的下載/營收總覽——《灌籃高手》一枝獨秀</h3>
+    <h3 style="font-size:1.1rem;margin:30px 0 10px;">📊 4.3　手遊的下載/營收總覽——《灌籃高手》一枝獨秀</h3>
     <div class="chart-box tall">
-      <h4>台港澳籃球手遊｜累計營收排行（估算）<span class="data-tag">14款・Sensor Tower</span></h4>
+      <h4>台港澳籃球手遊｜累計營收排行<span class="data-tag">14款・Sensor Tower</span></h4>
       <canvas id="revenueRankChart" style="height:420px;"></canvas>
     </div>
     <div class="stat-strip">
-      <div class="stat-chip"><div class="n">$1.01億</div><div class="t">灌籃高手手遊累計營收，是第二名的4倍以上</div></div>
-      <div class="stat-chip"><div class="n">$38.2</div><div class="t">灌籃高手RPD(每次下載營收)，全場最高</div></div>
+      <div class="stat-chip"><div class="n">$1.01億</div><div class="t">灌籃高手手遊自2020年上市至今的累計營收，是第二名的4倍以上</div></div>
+      <div class="stat-chip"><div class="n">$38.2</div><div class="t">灌籃高手手遊RPD(每次下載營收)最高</div></div>
       <div class="stat-chip"><div class="n">$2.6</div><div class="t">EA NBA LIVE Mobile的RPD，全場最低</div></div>
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">⏱️ 4.4　生命週期詳細數據：M1／M3／M6／Y1</h3>
-    <p>這5款是目前資料完整涵蓋到M6以上、具代表性的旗艦作品（其餘9款因上市未滿半年或資料起始日不確定，暫不適合做這種曲線比較），看下載量和營收隨時間累積的曲線：</p>
+    <p>以下5款是目前資料完整涵蓋到M6以上、具代表性的旗艦作品（其餘因上市未滿半年或資料起始日不確定，暫不列入曲線比較）：</p>
     <div class="chart-box">
-      <h4>下載量累積曲線（M1→M3→M6→Y1，單位：萬次）</h4>
+      <h4>下載量累積曲線（單位：萬次）</h4>
       <canvas id="lifecycleDownloadsChart"></canvas>
     </div>
     <div class="chart-box">
-      <h4>營收累積曲線（M1→M3→M6→Y1，單位：萬美元）</h4>
+      <h4>營收累積曲線（單位：萬美元）</h4>
       <canvas id="lifecycleRevenueChart"></canvas>
     </div>
     <div class="callout blue">
@@ -785,7 +786,6 @@
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">📱 4.5　雙平台與台港澳地區拆分總表</h3>
-    <p>表格首欄（遊戲名稱）與首列（欄位標題）已固定，左右／上下捲動時仍看得到對應的遊戲與欄位：</p>
     <div class="table-wrap data-table-tight">
       <table class="sticky-table">
         <thead><tr><th>遊戲</th><th>M1下載</th><th>M1營收</th><th>M3下載</th><th>M3營收</th><th>M6下載</th><th>M6營收</th><th>Y1下載</th><th>Y1營收</th><th>iOS下載%</th><th>Android下載%</th><th>iOS營收%</th><th>Android營收%</th><th>台灣%</th><th>香港%</th><th>澳門%</th></tr></thead>
@@ -808,15 +808,15 @@
       </table>
     </div>
     <div class="callout">
-      <div class="icon">⚠️</div>
-      <p><strong>資料限制：</strong>EA NBA LIVE Mobile、Streetball Allstar、籃下王者的M1數字明顯異常偏低，資料匯出起始日不等於真實上市日，這幾款的生命週期形狀暫不適合直接引用。</p>
+      <div class="icon">🔍</div>
+      <p><strong>關鍵發現：</strong>動漫IP驅動的作品(灌籃高手、黑子的籃球、街頭籃球2024)下載量在M6之後只再成長7-18%，代表首波聲量已經在前半年打完，後面進入平緩期；但NBA正版授權的手遊獨立產品線(NBA2K Mobile、EA NBA LIVE Mobile、籃下王者、NBA籃球大師)恰恰相反，因為會搭上真實生活中長期的球季，因此M6到Y1這半年下載量暴增76%到289%，營收更是翻倍以上。</p>
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">💸 4.6　課金強度隨時間拉高，不是首抽衝高</h3>
     <p>把14款遊戲全部列出來比較「下載量成長倍數」和「營收成長倍數」（皆以首月M1為基準）：</p>
     <div class="table-wrap data-table-tight">
       <table>
-        <thead><tr><th>遊戲</th><th>首月RPD</th><th>首月後RPD</th><th>下載成長倍數</th><th>營收成長倍數</th></tr></thead>
+        <thead><tr><th>遊戲</th><th>首月RPD</th><th>首月後RPD</th><th>首月後下載成長倍數</th><th>首月後營收成長倍數</th></tr></thead>
         <tbody>
           <tr><td>灌籃高手手遊</td><td>$2.6</td><td>$45.6</td><td>5.8倍</td><td style="font-weight:800;color:var(--pink);">86.1倍</td></tr>
           <tr><td>全明星街球派對</td><td>$6.5</td><td>$24.6</td><td>3.3倍</td><td style="font-weight:800;color:var(--pink);">9.6倍</td></tr>
@@ -837,13 +837,12 @@
     </div>
     <div class="callout blue">
       <div class="icon">📐</div>
-      <p><strong>「留存比新下載重要」的證據：</strong>如果新增下載是營收成長的主因，兩個倍數應該接近；但14款遊戲<strong>無一例外</strong>營收成長倍數都遠高於下載成長倍數——例如全明星街球派對下載只成長3.3倍，營收卻成長9.6倍；黑子的籃球下載成長2.6倍，營收成長9.0倍。這代表同一批M1就已經下載的玩家，之後貢獻了遠超過新增下載能解釋的營收成長，也就是留存下來的舊玩家持續加碼課金，而不是靠source源源不絕的新玩家撐營收。（EA NBA LIVE Mobile、Streetball Allstar、籃下王者三款因M1基期趨近於零，倍數被異常放大，僅供參考、不適合當代表案例）</p>
+      <p><strong>留存比新下載重要：</strong>如果新增下載是營收成長的主因，兩個倍數應該接近；但14款遊戲<strong>無一例外</strong>營收成長倍數都遠高於下載成長倍數——例如全明星街球派對下載只成長3.3倍，營收卻成長9.6倍；黑子的籃球下載成長2.6倍，營收成長9.0倍。這代表同一批M1就已經下載的玩家，之後貢獻了遠超過新增下載能解釋的營收成長，也就是留存下來的舊玩家持續加碼課金，而不是靠源源不絕的新玩家撐營收。（*** EA NBA LIVE Mobile、Streetball Allstar、籃下王者三款因M1基期趨近於零，倍數被異常放大，僅供參考、不適合當代表案例）</p>
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">🎭 4.7　有無IP，變現效率差多少？</h3>
-    <p>把14款依「有無IP授權」拆成三組比較平均RPD：</p>
     <div class="chart-box tall">
-      <h4>RPD（每次下載營收）比較，依IP類型分組上色</h4>
+      <h4>RPD(每次下載營收)比較</h4>
       <canvas id="rpdChart" style="height:420px;"></canvas>
       <div class="type-legend" style="margin-top:14px;margin-bottom:0;">
         <span><i style="background:#FF3E7F;"></i>動漫IP改編</span>
@@ -858,7 +857,7 @@
     </div>
     <div class="callout blue">
       <div class="icon">🔍</div>
-      <p><strong>關鍵發現：</strong>「動漫IP改編」的變現效率是另外兩組的近4倍，而「NBA正版授權」跟「完全原創、無任何IP」的平均表現幾乎沒有差異（$8.6 vs $8.8）——代表<strong>不是有IP就好，要是對的IP</strong>。花大錢拿NBA正版授權，變現效率不見得贏過一款做得好的原創遊戲；但拿到真正有粉絲基礎的動漫IP（如灌籃高手、黑子的籃球），效果非常顯著。樣本仍只有14款，建議之後擴大樣本並控制營運年期、定價策略等變數再做迴歸分析確認因果關係。</p>
+      <p><strong>關鍵發現：</strong>「動漫IP改編」的變現效率是另外兩組的近4倍，而「NBA正版授權」跟「完全原創」的平均表現幾乎沒有差異（$8.6 vs $8.8）——代表<strong>不是有IP就好，要是對的IP</strong>。花大錢拿NBA正版授權，變現效率不見得贏過一款做得好的原創遊戲；但拿到真正有粉絲基礎的動漫IP（如灌籃高手、黑子的籃球），效果則會非常顯著。</p>
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">🔗 4.8　三方交叉比對：地區、平台、變現效率</h3>
@@ -1197,11 +1196,11 @@ const marketValues = [0.214, 0.208, 0.199, 0.192, 0.159, 0.081, 0.094, 0.11, 0.0
   const navyColor = '#14213D', orangeColor = '#FF6B00', pinkColor = '#FF3E7F', yellowColor = '#FFC93C', lineColor = '#EAD9BE';
 
   const spikeEvents = {
-    '2020-06': 'FreeStyle LINE POD +灌籃高手手遊 同週上市',
-    '2023-01': 'THE FIRST SLAM DUNK 電影港台上映',
-    '2024-02': '黑子的籃球Street Rivals上市',
-    '2024-04': '全明星街球派對公測(林書豪代言)',
-    '2025-11': '未知事件(開放問題)'
+    '2020-06': 'FreeStyle+灌籃高手手遊 同週上市',
+    '2023-01': '灌籃高手電影 港台上映',
+    '2024-02': '黑子的籃球手遊 上市',
+    '2024-04': '全明星街球派對 上市(林書豪代言)',
+    '2025-11': 'NBA巔峰對決 上市'
   };
 
   const spikeAnnotationPlugin = {
