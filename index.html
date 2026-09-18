@@ -12,6 +12,19 @@
   if (location.hash) {
     history.replaceState(null, '', location.pathname + location.search);
   }
+
+  // 手機瀏覽器可能在頁面載入後才恢復舊捲動位置，因此再強制回到最上方
+  window.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
+  });
+
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+  });
+
+  window.addEventListener('pageshow', () => {
+    window.scrollTo(0, 0);
+  });
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>台港澳籃球遊戲產業與玩家研究報告</title>
@@ -154,7 +167,7 @@
 
   /* ---------- SECTIONS / PANELS ---------- */
   main{ max-width:920px; margin:0 auto; padding:0 24px; }
-  .panel{ display:none; scroll-margin-top:96px; }
+  .panel{ display:none; }
   .panel.active{ display:block; animation:fadeIn .25s ease; }
   @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
   section{
@@ -368,12 +381,45 @@
     table{ font-size:.76rem; }
     .data-table-tight table{ font-size:.72rem; }
     .top-btn{ right:12px; bottom:16px; width:42px; height:42px; font-size:1.1rem; }
-    .tabbar-inner{ max-width:100%; }
-    .tab-btn{ font-size:.78rem; padding:6px 12px 6px 6px; }
+    .tabbar{
+      padding:8px 10px;
+    }
+    .tabbar-inner{
+      max-width:100%;
+      gap:5px 6px;
+    }
+    .tab-btn{
+      font-size:.68rem;
+      padding:4px 9px 4px 5px;
+      border-width:2px;
+      gap:5px;
+    }
+    .tab-btn .num{
+      width:20px;
+      height:20px;
+      font-size:.68rem;
+    }
   }
   @media (max-width:420px){
     .scoreboard{ grid-template-columns:1fr 1fr; }
     .hero h1{ font-size:1.45rem; }
+
+    .tabbar{
+      padding:7px 8px;
+    }
+    .tabbar-inner{
+      gap:4px 5px;
+    }
+    .tab-btn{
+      font-size:.64rem;
+      padding:3px 8px 3px 4px;
+      gap:4px;
+    }
+    .tab-btn .num{
+      width:19px;
+      height:19px;
+      font-size:.62rem;
+    }
   }
 
   /* ---------- 營運中競品：宣傳圖卡片 ---------- */
@@ -1431,9 +1477,22 @@ const marketValues = [0.214, 0.208, 0.199, 0.192, 0.159, 0.081, 0.094, 0.11, 0.0
     panels.forEach(p => p.classList.toggle('active', p.id === id));
     buttons.forEach(b => b.classList.toggle('active', b.dataset.panel === id));
     history.replaceState(null, '', '#' + id);
+
     if(scroll){
       const target = document.getElementById(id);
-      requestAnimationFrame(() => target.scrollIntoView({ behavior:'smooth', block:'start' }));
+      const tabbar = document.getElementById('tabbar');
+
+      requestAnimationFrame(() => {
+        const tabbarHeight = tabbar ? tabbar.offsetHeight : 0;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+        const scrollTop = targetTop - tabbarHeight;
+
+        window.scrollTo({
+          top: Math.max(0, scrollTop),
+          left: 0,
+          behavior: 'auto'
+        });
+      });
     }
   }
 
@@ -1441,17 +1500,7 @@ const marketValues = [0.214, 0.208, 0.199, 0.192, 0.159, 0.081, 0.094, 0.11, 0.0
     btn.addEventListener('click', () => activate(btn.dataset.panel, true));
   });
 
-  // 預設顯示第 1 區，但不要因為切換內容而改變首頁定位
   activate('s1', false);
-
-  // 網站完整載入後，確保第一次進站一定從 Hero 最上方開始
-  window.addEventListener('load', () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'auto'
-    });
-  });
 
   // 回頂部按鈕
   const topBtn = document.getElementById('topBtn');
