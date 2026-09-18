@@ -3,28 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <script>
-  // 進站時不要恢復瀏覽器上一次的捲動位置
+  // 不讓瀏覽器因歷史紀錄或 URL hash 自動跳到內容區塊。
+  // 分頁切換由頁面自己的 JavaScript 控制，不在載入時強制 scrollTo。
   if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
+    history.scrollRestoration = 'auto';
   }
-
-  // 若網址殘留 #s1、#s8 等 hash，清除它，避免進站直接跳到內容區塊
-  if (location.hash) {
-    history.replaceState(null, '', location.pathname + location.search);
-  }
-
-  // 手機瀏覽器可能在頁面載入後才恢復舊捲動位置，因此再強制回到最上方
-  window.addEventListener('DOMContentLoaded', () => {
-    window.scrollTo(0, 0);
-  });
-
-  window.addEventListener('load', () => {
-    window.scrollTo(0, 0);
-  });
-
-  window.addEventListener('pageshow', () => {
-    window.scrollTo(0, 0);
-  });
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>台港澳籃球遊戲產業與玩家研究報告</title>
@@ -349,6 +332,51 @@
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><defs><clipPath id="bc2"><circle cx="13" cy="13" r="10.5"/></clipPath></defs><circle cx="13" cy="13" r="10.5" fill="%23FF3E7F" stroke="%23231F20" stroke-width="1.4"/><g clip-path="url(%23bc2)" stroke="%23231F20" stroke-width="1.1" fill="none"><path d="M13 2.5v21"/><path d="M2.5 13h21"/><path d="M4.5 5c4.5 3.6 4.5 12.4 0 16"/><path d="M21.5 5c-4.5 3.6-4.5 12.4 0 16"/></g></svg>') 13 13, pointer;
   }
 
+  /* ---------- RWD 進一步優化 ---------- */
+  @media (max-width:1023px){
+    .hero-inner{ max-width:860px; }
+    main{ max-width:900px; }
+    .tabbar-inner{ max-width:100%; }
+  }
+
+  @media (max-width:760px){
+    .tabbar{ padding:8px 10px; overflow:hidden; }
+    .tabbar-inner{ max-width:none; flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; overflow-y:hidden; gap:6px; padding-bottom:2px; scrollbar-width:none; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; }
+    .tabbar-inner::-webkit-scrollbar{ display:none; }
+    .tab-btn{ flex:0 0 auto; white-space:nowrap; font-size:.78rem; padding:6px 11px 6px 6px; gap:5px; }
+    .tab-btn .num{ width:21px; height:21px; font-size:.68rem; }
+    .timeline .t-item p{ font-size:.82rem; line-height:1.65; }
+    .t-item{ margin-bottom:26px; }
+    .chart-box{ --chart-height:280px; }
+    .chart-box.tall{ --chart-height:340px; }
+    .chart-box canvas{ max-height:none; height:var(--chart-height) !important; }
+    .table-wrap{ -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; }
+  }
+
+  @media (max-width:479px){
+    .hero{ padding:32px 14px 28px; }
+    .hero h1{ font-size:1.5rem; }
+    .hero-sub{ font-size:.9rem; line-height:1.7; }
+    .scoreboard{ gap:10px; }
+    .score-card{ padding:13px 12px; border-radius:14px; }
+    .score-card .num{ font-size:1.25rem; }
+    .score-card .label{ font-size:.72rem; }
+    main{ padding:0 12px; }
+    section{ padding:26px 0 34px; }
+    .sec-head{ gap:11px; margin-bottom:20px; }
+    .sec-badge{ width:40px; height:40px; border-radius:12px; font-size:1rem; }
+    .sec-head h2{ font-size:1.08rem; }
+    .card{ padding:16px; border-radius:15px; }
+    .card-grid{ gap:12px; }
+    .callout{ padding:16px; gap:10px; }
+    .callout p{ font-size:.88rem; }
+    .chart-box{ padding:15px 12px 10px; --chart-height:250px; }
+    .chart-box.tall{ --chart-height:315px; }
+    .timeline{ padding-left:40px; }
+    .timeline::before{ left:13px; width:4px; }
+    .t-dot{ left:-40px; width:29px; height:29px; font-size:.82rem; border-width:3px; }
+  }
+
   /* ---------- 回頂部按鈕（點16） ---------- */
   .top-btn{
     position:fixed; right:18px; bottom:26px; z-index:60;
@@ -455,9 +483,220 @@
   .endorser-table th:nth-child(3), .endorser-table td:nth-child(3){ width:20%; }
   .endorser-table th:nth-child(4), .endorser-table td:nth-child(4){ width:38%; }
   .endorser-table td{ white-space:normal; }
+
+  /* ---------- Mobile basketball effects ---------- */
+  .mobile-ball-effects{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:5;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .mobile-ball{
+    position:absolute;
+    display:block;
+    font-size:20px;
+    opacity:.12;
+    filter:saturate(.9);
+    will-change:transform;
+  }
+  .mobile-ball.ball-a{ left:3%; top:18%; animation:mobileBallFloatA 8s ease-in-out infinite; }
+  .mobile-ball.ball-b{ right:4%; top:42%; animation:mobileBallFloatB 10s ease-in-out infinite; animation-delay:-2s; }
+  .mobile-ball.ball-c{ left:6%; bottom:18%; animation:mobileBallFloatC 9s ease-in-out infinite; animation-delay:-4s; }
+  .mobile-ball.ball-d{ right:8%; bottom:8%; animation:mobileBallFloatD 11s ease-in-out infinite; animation-delay:-6s; }
+
+  @keyframes mobileBallFloatA{
+    0%,100%{transform:translate3d(0,0,0) rotate(0deg);}
+    50%{transform:translate3d(10px,-22px,0) rotate(18deg);}
+  }
+  @keyframes mobileBallFloatB{
+    0%,100%{transform:translate3d(0,0,0) rotate(0deg);}
+    50%{transform:translate3d(-12px,18px,0) rotate(-22deg);}
+  }
+  @keyframes mobileBallFloatC{
+    0%,100%{transform:translate3d(0,0,0) rotate(0deg);}
+    50%{transform:translate3d(14px,-15px,0) rotate(16deg);}
+  }
+  @keyframes mobileBallFloatD{
+    0%,100%{transform:translate3d(0,0,0) rotate(0deg);}
+    50%{transform:translate3d(-10px,-18px,0) rotate(-18deg);}
+  }
+
+  /* ---------- Tab arrows ---------- */
+  .tabbar{
+    position:sticky;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .tab-arrow{
+    display:none;
+    flex:0 0 28px;
+    width:28px;
+    height:34px;
+    border:0;
+    border-radius:10px;
+    background:var(--navy);
+    color:#fff;
+    font-size:25px;
+    line-height:1;
+    align-items:center;
+    justify-content:center;
+    padding:0 0 3px;
+    box-shadow:0 2px 0 rgba(20,33,61,.18);
+    cursor:pointer;
+    z-index:3;
+  }
+  .tab-arrow:disabled{
+    opacity:.25;
+    cursor:default;
+  }
+
+
+  @media (max-width:760px){
+    .mobile-ball-effects{
+      display:block;
+    }
+
+    .tabbar{
+      padding:7px 8px;
+      gap:5px;
+    }
+    .tab-arrow{
+      display:flex;
+    }
+    .tabbar-inner{
+      flex:1 1 auto;
+      min-width:0;
+      max-width:none;
+      gap:6px;
+      padding:1px 0 3px;
+    }
+    .tab-btn{
+      font-size:.78rem;
+      padding:6px 11px 6px 6px;
+      min-height:34px;
+    }
+
+    /* 表格：保留完整字體，不再靠縮小字級塞入 */
+    .table-wrap{
+      overflow-x:auto;
+      overflow-y:hidden;
+      scrollbar-width:thin;
+      scrollbar-color:var(--navy) var(--cream);
+      padding-bottom:4px;
+    }
+    .table-wrap::-webkit-scrollbar{
+      height:9px;
+    }
+    .table-wrap::-webkit-scrollbar-track{
+      background:var(--cream);
+      border-radius:99px;
+    }
+    .table-wrap::-webkit-scrollbar-thumb{
+      background:var(--navy);
+      border-radius:99px;
+      border:2px solid var(--cream);
+    }
+    .data-table-tight table{
+      min-width:760px;
+      font-size:.78rem;
+    }
+    .data-table-tight td,
+    .data-table-tight th{
+      padding:9px 12px;
+    }
+    .table-wrap:not(.data-table-tight) table{
+      min-width:620px;
+    }
+
+  }
+
+  @media (max-width:479px){
+    .mobile-ball{
+      font-size:18px;
+      opacity:.10;
+    }
+    .tab-arrow{
+      flex-basis:26px;
+      width:26px;
+      height:32px;
+      font-size:23px;
+    }
+    .tabbar-inner{
+      gap:5px;
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .mobile-ball{
+      animation:none !important;
+    }
+  }
+
+
+  /* ---------- 橫向長條圖：手機不再被拉成窄長比例 ---------- */
+  .hbar-scroll{
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scrollbar-color:var(--navy) var(--cream);
+    padding-bottom:6px;
+  }
+  .hbar-scroll::-webkit-scrollbar{ height:8px; }
+  .hbar-scroll::-webkit-scrollbar-track{
+    background:var(--cream);
+    border-radius:99px;
+  }
+  .hbar-scroll::-webkit-scrollbar-thumb{
+    background:var(--navy);
+    border-radius:99px;
+  }
+  .hbar-canvas{
+    display:block;
+    width:100%;
+    height:480px;
+  }
+  .hbar-hint{display:none;}
+
+  @media (max-width:760px){
+    .chart-box:has(.hbar-scroll){
+      overflow:visible;
+      padding-left:12px;
+      padding-right:12px;
+    }
+    .hbar-scroll canvas.hbar-medium{
+      width:520px !important;
+      height:420px !important;
+      max-width:none;
+    }
+    .hbar-scroll canvas.hbar-large{
+      width:560px !important;
+      height:610px !important;
+      max-width:none;
+    }
+    .hbar-hint{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      margin-top:2px;
+      font-size:.68rem;
+      color:var(--navy-soft);
+    }
+  }
+
 </style>
 </head>
 <body>
+  <div class="mobile-ball-effects" aria-hidden="true">
+    <span class="mobile-ball ball-a">🏀</span>
+    <span class="mobile-ball ball-b">🏀</span>
+    <span class="mobile-ball ball-c">🏀</span>
+    <span class="mobile-ball ball-d">🏀</span>
+  </div>
 
 <header class="hero" id="hero">
   <div class="court-lines">
@@ -481,6 +720,7 @@
 </header>
 
 <div class="tabbar" id="tabbar">
+  <button class="tab-arrow tab-arrow-left" id="tabArrowLeft" type="button" aria-label="向左查看分頁">‹</button>
   <div class="tabbar-inner">
     <button class="tab-btn" data-panel="s1"><span class="num">一</span>前言－研究背景</button>
     <button class="tab-btn" data-panel="s2"><span class="num">二</span>前言－籃球話題</button>
@@ -492,6 +732,7 @@
     <button class="tab-btn" data-panel="s8"><span class="num">八</span>營運中競品</button>
     <button class="tab-btn" data-panel="s9"><span class="num">九</span>結論</button>
   </div>
+  <button class="tab-arrow tab-arrow-right" id="tabArrowRight" type="button" aria-label="向右查看分頁">›</button>
 </div>
 
 <main>
@@ -803,7 +1044,10 @@
     <p>整理所有已知遊戲(無論已關服或仍在營運)的營運時長，仍在營運的以至今2026/09為終點計算：</p>
     <div class="chart-box tall">
       <h4>各遊戲營運時長(月)——橘色已死 / 藍色營運中</h4>
-      <canvas id="fullLifespanChart" style="height:520px;"></canvas>
+      <div class="hbar-scroll">
+        <canvas id="fullLifespanChart" class="hbar-canvas hbar-large"></canvas>
+      </div>
+      <div class="hbar-hint">← 左右滑動查看完整圖表 →</div>
     </div>
     <div class="stat-strip">
       <div class="stat-chip"><div class="n">16款</div><div class="t">2020年後推出的籃球手遊</div></div>
@@ -817,7 +1061,10 @@
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">📊 4.3　手遊的下載/營收總覽——《灌籃高手》一枝獨秀</h3>
     <div class="chart-box tall">
       <h4>台港澳籃球手遊｜累計營收排行<span class="data-tag">14款・Sensor Tower</span></h4>
-      <canvas id="revenueRankChart" style="height:420px;"></canvas>
+      <div class="hbar-scroll">
+        <canvas id="revenueRankChart" class="hbar-canvas hbar-medium"></canvas>
+      </div>
+      <div class="hbar-hint">← 左右滑動查看完整圖表 →</div>
     </div>
     <div class="stat-strip">
       <div class="stat-chip"><div class="n">$1.01億</div><div class="t">灌籃高手手遊自2020年上市至今的累計營收，是第二名的4倍以上</div></div>
@@ -1476,7 +1723,10 @@ const marketValues = [0.214, 0.208, 0.199, 0.192, 0.159, 0.081, 0.094, 0.11, 0.0
   function activate(id, scroll){
     panels.forEach(p => p.classList.toggle('active', p.id === id));
     buttons.forEach(b => b.classList.toggle('active', b.dataset.panel === id));
-    history.replaceState(null, '', '#' + id);
+    const activeBtn = document.querySelector(`.tab-btn[data-panel="${id}"]`);
+    activeBtn?.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+    // 分頁切換不寫入 hash，避免重新載入時瀏覽器直接跳過 Hero 主版頭。
+    history.replaceState(null, '', location.pathname + location.search);
 
     if(scroll){
       const target = document.getElementById(id);
@@ -1500,6 +1750,34 @@ const marketValues = [0.214, 0.208, 0.199, 0.192, 0.159, 0.081, 0.094, 0.11, 0.0
     btn.addEventListener('click', () => activate(btn.dataset.panel, true));
   });
 
+  // 手機 Sticky Bar 左右箭頭
+  const tabScroller = document.querySelector('.tabbar-inner');
+  const tabArrowLeft = document.getElementById('tabArrowLeft');
+  const tabArrowRight = document.getElementById('tabArrowRight');
+
+  function updateTabArrows(){
+    if(!tabScroller || !tabArrowLeft || !tabArrowRight) return;
+    const maxScroll = tabScroller.scrollWidth - tabScroller.clientWidth;
+    const atStart = tabScroller.scrollLeft <= 2;
+    const atEnd = tabScroller.scrollLeft >= maxScroll - 2;
+    tabArrowLeft.disabled = atStart;
+    tabArrowRight.disabled = atEnd;
+  }
+
+  function scrollTabs(direction){
+    if(!tabScroller) return;
+    tabScroller.scrollBy({
+      left: direction * Math.max(180, tabScroller.clientWidth * .72),
+      behavior:'smooth'
+    });
+  }
+
+  tabArrowLeft?.addEventListener('click', () => scrollTabs(-1));
+  tabArrowRight?.addEventListener('click', () => scrollTabs(1));
+  tabScroller?.addEventListener('scroll', updateTabArrows, {passive:true});
+  window.addEventListener('resize', updateTabArrows);
+  requestAnimationFrame(updateTabArrows);
+
   activate('s1', false);
 
   // 回頂部按鈕
@@ -1508,7 +1786,24 @@ const marketValues = [0.214, 0.208, 0.199, 0.192, 0.159, 0.081, 0.094, 0.11, 0.0
     topBtn.classList.toggle('show', window.scrollY > 400);
   });
   topBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const tabbar = document.getElementById('tabbar');
+    if (!tabbar) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // 回到 Sticky Bar，而不是回到 Hero。
+    // Sticky Bar 固定在畫面頂端，因此把目前內容定位在 Sticky Bar 下方。
+    const currentPanel = document.querySelector('.panel.active');
+    const tabbarHeight = tabbar.offsetHeight;
+    const targetTop = currentPanel
+      ? currentPanel.getBoundingClientRect().top + window.scrollY - tabbarHeight - 8
+      : tabbar.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: 'smooth'
+    });
   });
 </script>
 
