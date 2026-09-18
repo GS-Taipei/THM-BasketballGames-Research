@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玩家評論文字探勘｜台港澳籃球遊戲產業與玩家研究報告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF8ED;
+  --navy:#14213D;
+  --orange:#FF6B00;
+  --pink:#FF3E7F;
+  --yellow:#FFC93C;
+  --white:#FFFFFF;
+  --navy-soft:#3A4468;
+  --line:#EAD9BE;
+  --green:#4F8A62;
+  --red:#C94B4B;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--navy);
+  font-family:'Noto Sans TC',sans-serif;
+  line-height:1.8;
+  font-size:16px;
+}
+a{color:var(--orange);}
+.page{
+  max-width:960px;
+  margin:0 auto;
+  padding:0 24px 70px;
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  margin:0 -24px 32px;
+  padding:58px 28px 46px;
+  background:linear-gradient(180deg,#FFF3DC 0%,var(--cream) 100%);
+  border-bottom:4px solid var(--navy);
+}
+.hero-inner{max-width:900px;margin:auto;}
+.kicker{
+  display:inline-flex;
+  background:var(--navy);
+  color:#fff;
+  padding:6px 15px;
+  border-radius:999px;
+  font-size:.8rem;
+  font-weight:700;
+  margin-bottom:18px;
+}
+.hero h1{
+  margin:0 0 12px;
+  font-family:'Baloo 2','Noto Sans TC',sans-serif;
+  font-size:clamp(2rem,5vw,3rem);
+  line-height:1.25;
+  font-weight:900;
+}
+.hero h1 span{color:var(--orange);}
+.hero-sub{
+  color:var(--navy-soft);
+  margin:0;
+  max-width:820px;
+}
+.back{
+  display:inline-block;
+  margin-top:22px;
+  padding:8px 15px;
+  border:2px solid var(--navy);
+  border-radius:999px;
+  color:var(--navy);
+  background:#fff;
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:700;
+}
+.back:hover{background:var(--navy);color:#fff;}
+
+.notice{
+  background:#fff;
+  border:2px solid var(--line);
+  border-left:6px solid var(--yellow);
+  border-radius:16px;
+  padding:16px 18px;
+  margin-bottom:26px;
+}
+.notice strong{display:block;margin-bottom:4px;}
+.notice p{margin:0;color:var(--navy-soft);font-size:.9rem;}
+
+.toc{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:0 0 30px;
+}
+.toc a{
+  text-decoration:none;
+  color:var(--navy);
+  background:#fff;
+  border:2px solid var(--navy);
+  border-radius:999px;
+  padding:6px 13px;
+  font-size:.8rem;
+  font-weight:700;
+}
+.toc a:hover{background:var(--yellow);}
+
+.section{
+  margin:42px 0 0;
+}
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+}
+.badge{
+  flex:0 0 auto;
+  width:48px;height:48px;
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--yellow);
+  box-shadow:3px 3px 0 var(--navy);
+  font-family:'Baloo 2';
+  font-size:1.2rem;
+  font-weight:800;
+}
+.section h2{
+  margin:0;
+  font-size:1.45rem;
+  font-weight:900;
+}
+.section-intro{
+  color:var(--navy-soft);
+  margin:0 0 18px;
+}
+
+.game{
+  background:#fff;
+  border-radius:20px;
+  padding:22px;
+  margin:18px 0;
+  box-shadow:0 3px 0 rgba(20,33,61,.08);
+  border-left:6px solid var(--pink);
+}
+.game:nth-of-type(2){border-left-color:var(--orange);}
+.game:nth-of-type(3){border-left-color:var(--yellow);}
+.game-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:flex-start;
+  margin-bottom:16px;
+}
+.game h3{
+  margin:0;
+  font-size:1.18rem;
+}
+.source-count{
+  flex-shrink:0;
+  background:var(--navy);
+  color:#fff;
+  border-radius:999px;
+  padding:4px 10px;
+  font-size:.7rem;
+  font-weight:700;
+}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;}
+.tag{
+  display:inline-block;
+  padding:3px 10px;
+  border-radius:999px;
+  background:#FFF3DC;
+  color:var(--navy);
+  font-size:.72rem;
+  font-weight:700;
+}
+.tag.negative{background:#FCE8E8;color:#8D3333;}
+.tag.positive{background:#EAF5ED;color:#356344;}
+
+.insight-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px;
+  margin-top:14px;
+}
+.insight{
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px 14px;
+}
+.insight h4{
+  margin:0 0 5px;
+  font-size:.88rem;
+}
+.insight p{
+  margin:0;
+  font-size:.83rem;
+  color:var(--navy-soft);
+}
+.quote{
+  margin:15px 0 0;
+  padding:12px 14px;
+  background:#FFF8ED;
+  border-radius:12px;
+  border-left:4px solid var(--navy);
+  font-size:.82rem;
+  color:var(--navy-soft);
+}
+.quote strong{color:var(--navy);}
+.quote small{display:block;margin-top:5px;color:#737B98;font-size:.7rem;}
+
+.matrix{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+}
+.matrix th,.matrix td{
+  padding:12px 13px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+  font-size:.82rem;
+}
+.matrix th{
+  background:var(--navy);
+  color:#fff;
+  font-weight:700;
+  white-space:nowrap;
+}
+.matrix tr:last-child td{border-bottom:0;}
+.matrix td:first-child{font-weight:700;white-space:nowrap;}
+
+.key-findings{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.finding{
+  background:var(--navy);
+  color:#fff;
+  border-radius:16px;
+  padding:18px;
+}
+.finding:nth-child(2){border-top:5px solid var(--pink);}
+.finding:nth-child(3){border-top:5px solid var(--yellow);}
+.finding:nth-child(1){border-top:5px solid var(--orange);}
+.finding h3{margin:0 0 7px;color:#fff;font-size:.95rem;}
+.finding p{margin:0;color:#D8DFF0;font-size:.8rem;}
+
+.method{
+  background:#fff;
+  border-radius:18px;
+  padding:20px;
+  border:1px solid var(--line);
+}
+.method ul{margin:8px 0 0;padding-left:20px;color:var(--navy-soft);}
+.method li{margin:5px 0;font-size:.84rem;}
+
+.sources{
+  margin-top:16px;
+  padding-top:12px;
+  border-top:1px dashed var(--line);
+}
+.sources a{
+  display:block;
+  margin:5px 0;
+  font-size:.76rem;
+  word-break:break-all;
+}
+
+.footer{
+  margin-top:48px;
+  padding-top:18px;
+  border-top:3px solid var(--navy);
+  color:#737B98;
+  font-size:.72rem;
+}
+
+@media(max-width:700px){
+  .page{padding:0 15px 50px;}
+  .hero{margin:0 -15px 24px;padding:42px 20px 34px;}
+  .game{padding:17px;}
+  .game-head{display:block;}
+  .source-count{display:inline-block;margin-top:7px;}
+  .insight-grid,.key-findings{grid-template-columns:1fr;}
+  .matrix-wrap{overflow-x:auto;margin:0 -2px;}
+  .matrix{min-width:650px;}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">5.2-3｜App Store 評論文字探勘</div>
+    <h1>玩家評論<span>文字探勘</span></h1>
+    <p class="hero-sub">
+      從公開玩家評論整理籃球競技手遊的主要正負向回饋，聚焦於課金、角色平衡、匹配與隊友、技術穩定性、福利養成，以及 IP／畫面等體驗面向。
+    </p>
+    <a class="back" href="index.html">← 返回研究報告</a>
+  </div>
+</header>
+
+<div class="notice">
+  <strong>閱讀方式</strong>
+  <p>
+    本頁不是完整評論母體，而是針對公開評論進行主題式整理。評論內容屬玩家個人經驗與觀點；「玩家反映」不等同於系統已被驗證存在該問題。
+  </p>
+</div>
+
+<nav class="toc">
+  <a href="#summary">核心發現</a>
+  <a href="#allstar">全明星街球派對</a>
+  <a href="#kuroko">黑子的籃球 Street Rivals</a>
+  <a href="#slamdunk">灌籃高手 SLAM DUNK</a>
+  <a href="#matrix">跨遊戲比較</a>
+  <a href="#method">研究說明</a>
+</nav>
+
+<section class="section" id="summary">
+  <div class="section-head">
+    <div class="badge">01</div>
+    <h2>核心發現</h2>
+  </div>
+  <div class="key-findings">
+    <div class="finding">
+      <h3>① 付費不是單一的「反感」</h3>
+      <p>評論同時存在高額課金抱怨，以及「無課／低課仍能取得角色」的正向經驗。玩家更在意付費與競技優勢、角色取得及長期價值之間的關係。</p>
+    </div>
+    <div class="finding">
+      <h3>② 競技體驗高度受他人影響</h3>
+      <p>匹配差距、掛機、不傳球、隊友操作與檢舉處理，是多款遊戲評論中反覆出現的議題。</p>
+    </div>
+    <div class="finding">
+      <h3>③ 長期留存與「公平感」相連</h3>
+      <p>評論不只談單一角色或單次更新，也會延伸到新舊角色平衡、新手／回鍋門檻、更新節奏與遊戲是否仍適合休閒玩家。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="allstar">
+  <div class="section-head">
+    <div class="badge">02</div>
+    <h2>全明星街球派對</h2>
+  </div>
+  <p class="section-intro">
+    台灣 App Store 公開評論中可觀察到：匹配、掛機與隊友品質是明顯討論點；同時也存在對遊戲本身與玩法的正向評價。
+  </p>
+
+  <div class="game">
+    <div class="game-head">
+      <h3>玩家回饋主題</h3>
+      <span class="source-count">台灣 App Store｜4.7／5｜約 4.7 萬則評分</span>
+    </div>
+    <div class="tags">
+      <span class="tag negative">匹配差距</span>
+      <span class="tag negative">掛機／隊友</span>
+      <span class="tag negative">競技體驗</span>
+      <span class="tag positive">遊戲性</span>
+    </div>
+    <div class="insight-grid">
+      <div class="insight">
+        <h4>👥 匹配與隊友</h4>
+        <p>評論反映排位中可能出現段位／戰力差距，以及隊友操作與掛機問題；部分玩家希望強化匹配與檢舉處理。</p>
+      </div>
+      <div class="insight">
+        <h4>⚖️ 競技公平感</h4>
+        <p>玩家對「對手與隊友實力是否接近」十分敏感，尤其在排位模式中，隊友品質會直接影響遊玩感受。</p>
+      </div>
+      <div class="insight">
+        <h4>🎮 玩法吸引力</h4>
+        <p>公開評論並非全為負向；仍有玩家以「蠻好玩」等方式肯定遊戲本身，顯示問題較集中於競技環境與配對體驗。</p>
+      </div>
+      <div class="insight">
+        <h4>🔎 可觀察指標</h4>
+        <p>後續研究可追蹤：掛機關鍵詞、匹配關鍵詞、排位關鍵詞，以及「好玩／有趣」等正向詞的比例變化。</p>
+      </div>
+    </div>
+    <div class="quote">
+      <strong>評論例：</strong>「改善匹配問題」與「最近的掛機仔太多了吧」是目前公開評論中直接指向競技環境的代表性表述。
+      <small>來源：台灣 App Store 評分與評論頁。</small>
+    </div>
+    <div class="sources">
+      <a href="https://apps.apple.com/tw/app/%E5%85%A8%E6%98%8E%E6%98%9F%E8%A1%97%E7%90%83%E6%B4%BE%E5%B0%8D/id6469999573?platform=iphone&see-all=reviews" target="_blank" rel="noopener">App Store｜全明星街球派對｜評分與評論</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="kuroko">
+  <div class="section-head">
+    <div class="badge">03</div>
+    <h2>黑子的籃球 Street Rivals</h2>
+  </div>
+  <p class="section-intro">
+    公開評論同時呈現角色取得、課金、角色平衡、閃退／網路，以及隊友與匹配等多層次議題；正向回饋則包含 IP 還原、動畫與籃球技能表現。
+  </p>
+
+  <div class="game">
+    <div class="game-head">
+      <h3>玩家回饋主題</h3>
+      <span class="source-count">台灣 App Store｜4.6／5｜約 1.1 萬則評分</span>
+    </div>
+    <div class="tags">
+      <span class="tag negative">課金</span>
+      <span class="tag negative">角色平衡</span>
+      <span class="tag negative">閃退／網路</span>
+      <span class="tag negative">隊友</span>
+      <span class="tag positive">IP／動畫</span>
+      <span class="tag positive">角色取得</span>
+    </div>
+    <div class="insight-grid">
+      <div class="insight">
+        <h4>💰 課金與角色取得</h4>
+        <p>有評論描述高額投入與新角色推出頻率；另一方面，也有玩家表示想要的角色可以透過無課方式取得，只是需要較長時間。</p>
+      </div>
+      <div class="insight">
+        <h4>⚖️ 新舊角色平衡</h4>
+        <p>部分玩家認為新角色強勢期較長、舊角色調整不足；這類評論把「角色推出速度」與「長期競技環境」連在一起。</p>
+      </div>
+      <div class="insight">
+        <h4>🛠️ 閃退與流暢度</h4>
+        <p>有評論具體描述對局中閃退，並提及特定裝置；另有評論希望改善網路品質與遊戲運行流暢度。</p>
+      </div>
+      <div class="insight">
+        <h4>🏀 IP／視覺表現</h4>
+        <p>也有玩家直接肯定畫風與籃球技能的還原程度，顯示 IP 表現與遊戲體驗仍能形成正向口碑。</p>
+      </div>
+    </div>
+    <div class="quote">
+      <strong>評論例：</strong>「無課免費就可以拿到，只是有點久」——同一頁評論也能看到高額課金與低課／無課經驗並存。
+      <small>來源：台灣 App Store 評分與評論頁。</small>
+    </div>
+    <div class="sources">
+      <a href="https://apps.apple.com/tw/app/%E9%BB%91%E5%AD%90%E7%9A%84%E7%B1%83%E7%90%83-street-rivals/id6448944162?platform=iphone&see-all=reviews" target="_blank" rel="noopener">App Store｜黑子的籃球 Street Rivals｜評分與評論</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="slamdunk">
+  <div class="section-head">
+    <div class="badge">04</div>
+    <h2>灌籃高手 SLAM DUNK</h2>
+  </div>
+  <p class="section-intro">
+    公開評論呈現較長期營運遊戲常見的議題：角色強度與價格、新手／回鍋體驗、隊友行為、福利，以及玩家對 IP 情懷的持續支持。
+  </p>
+
+  <div class="game">
+    <div class="game-head">
+      <h3>玩家回饋主題</h3>
+      <span class="source-count">台灣 App Store｜4.6／5｜約 12 萬則評分</span>
+    </div>
+    <div class="tags">
+      <span class="tag negative">課金壓力</span>
+      <span class="tag negative">角色強度</span>
+      <span class="tag negative">新手門檻</span>
+      <span class="tag negative">掛機／隊友</span>
+      <span class="tag positive">福利</span>
+      <span class="tag positive">IP 情懷</span>
+    </div>
+    <div class="insight-grid">
+      <div class="insight">
+        <h4>💰 角色價格與強度</h4>
+        <p>部分評論將傳奇／高強度角色與較高消費門檻連結，認為休閒或無課玩家的體驗可能受到影響。</p>
+      </div>
+      <div class="insight">
+        <h4>🆕 新手與回鍋</h4>
+        <p>有玩家擔心新手面對成熟帳號、角色與養成差距；也有評論提出希望提供回鍋玩家更完整的追趕資源。</p>
+      </div>
+      <div class="insight">
+        <h4>🎁 福利與活動</h4>
+        <p>正向評論提到活動多、部分資源可以透過遊戲內方式取得，顯示福利設計可能是降低付費負面感受的因素之一。</p>
+      </div>
+      <div class="insight">
+        <h4>👥 隊友與競技環境</h4>
+        <p>掛機、不傳球、角色選擇與檢舉處理等問題，會讓玩家即使在獲勝時也產生負面情緒。</p>
+      </div>
+    </div>
+    <div class="quote">
+      <strong>評論例：</strong>「活動也蠻多」與「遇到爛隊友」同時出現在同一則長篇評論中，呈現福利正向與競技環境負向可以並存。
+      <small>來源：台灣 App Store 評分與評論。</small>
+    </div>
+    <div class="sources">
+      <a href="https://apps.apple.com/tw/app/%E7%81%8C%E7%B1%83%E9%AB%98%E6%89%8B-slam-dunk/id1489675064?platform=iphone&see-all=reviews" target="_blank" rel="noopener">App Store｜灌籃高手 SLAM DUNK｜評分與評論</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="matrix">
+  <div class="section-head">
+    <div class="badge">05</div>
+    <h2>跨遊戲評論主題比較</h2>
+  </div>
+  <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>主題</th>
+          <th>全明星街球派對</th>
+          <th>黑子的籃球 Street Rivals</th>
+          <th>灌籃高手 SLAM DUNK</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>付費／課金</td>
+          <td>本次抽樣較集中於競技匹配與隊友；付費不是主要整理軸。</td>
+          <td>高額課金與無課／低課角色取得經驗並存。</td>
+          <td>部分評論直接將角色強度、價格與無課體驗連結。</td>
+        </tr>
+        <tr>
+          <td>角色平衡</td>
+          <td>本次公開評論抽樣未作為主要議題呈現。</td>
+          <td>新角色強勢、舊角色調整不足是明確反饋。</td>
+          <td>新手與休閒玩家對強勢角色的門檻感受較明顯。</td>
+        </tr>
+        <tr>
+          <td>匹配／隊友</td>
+          <td>掛機、匹配差距、隊友操作是明確議題。</td>
+          <td>隊友品質、不傳球、希望篩選玩家等反饋。</td>
+          <td>掛機、不傳球、角色選擇與檢舉處理反覆出現。</td>
+        </tr>
+        <tr>
+          <td>技術問題</td>
+          <td>本次抽樣未作為主要整理軸。</td>
+          <td>閃退、網路與流暢度有具體評論。</td>
+          <td>本次整理以課金、角色、隊友與新手體驗為主。</td>
+        </tr>
+        <tr>
+          <td>正向回饋</td>
+          <td>仍有玩家認為遊戲好玩。</td>
+          <td>IP、畫風、動畫與技能還原受到肯定。</td>
+          <td>活動福利、排位樂趣與 IP 情懷形成正向回饋。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="method">
+  <div class="section-head">
+    <div class="badge">06</div>
+    <h2>研究說明</h2>
+  </div>
+  <div class="method">
+    <ul>
+      <li>資料來源以台灣 App Store 公開「評分與評論」頁面為主。</li>
+      <li>本頁採主題式人工整理，不代表完整評論母體的統計分布。</li>
+      <li>評論中的課金金額、裝置型號、遊玩時間等屬評論者自述，未另行驗證。</li>
+      <li>同一玩家可能同時提出正向與負向意見，因此分類不是互斥的。</li>
+      <li>「玩家反映」代表公開評論中出現該觀點，不代表該觀點可直接推論為所有玩家的共通感受。</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="footer">
+  <div>資料整理：玩家評論文字探勘｜研究報告 5.2-3 延伸頁</div>
+  <div>頁面可獨立部署於 GitHub Pages；與主報告 index.html 放在同一資料夾即可。</div>
+</footer>
+
+</div>
+</body>
+</html>
