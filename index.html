@@ -24,9 +24,8 @@
   }
   /* 分頁色彩分組：一致規則 — 前言(一二)=橘｜代理與數據(三四)=粉｜受眾與文化(五六七)=黃｜結論(八)=深藍 */
   section#s1, section#s2, section#s3 { --group:#9CA3AF; --group-text:#FFFFFF; }
-  section#s4 { --group:var(--pink);   --group-text:#FFFFFF; }
-  section#s5, section#s6, section#s7, section#s8 { --group:var(--yellow); --group-text:var(--navy); }
-  section#s9 { --group:var(--navy);  --group-text:#FFFFFF; }
+  section#s4, section#s5, section#s6, section#s7, section#s8 { --group:var(--yellow); --group-text:var(--navy); }
+  section#s9 { --group:var(--pink);  --group-text:#FFFFFF; }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -89,16 +88,13 @@
   .tab-btn:nth-child(1).active, .tab-btn:nth-child(2).active, .tab-btn:nth-child(3).active{
     background:#9CA3AF; border-color:#9CA3AF; color:#fff;
   }
-  .tab-btn:nth-child(4).active{
-    background:var(--pink); border-color:var(--pink);
-  }
-  .tab-btn:nth-child(5).active, .tab-btn:nth-child(6).active, .tab-btn:nth-child(7).active, .tab-btn:nth-child(8).active{
+  .tab-btn:nth-child(4).active, .tab-btn:nth-child(5).active, .tab-btn:nth-child(6).active, .tab-btn:nth-child(7).active, .tab-btn:nth-child(8).active{
     background:var(--yellow); border-color:var(--yellow); color:var(--navy);
   }
-  .tab-btn:nth-child(5).active .num, .tab-btn:nth-child(6).active .num, .tab-btn:nth-child(7).active .num, .tab-btn:nth-child(8).active .num{
+  .tab-btn:nth-child(4).active .num, .tab-btn:nth-child(5).active .num, .tab-btn:nth-child(6).active .num, .tab-btn:nth-child(7).active .num, .tab-btn:nth-child(8).active .num{
     background:var(--navy); color:var(--white);
   }
-  .tab-btn:nth-child(9).active{ background:var(--navy); border-color:var(--navy); }
+  .tab-btn:nth-child(9).active{ background:var(--pink); border-color:var(--pink); }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -384,6 +380,12 @@
   .comp-card-body{ padding:14px 16px; }
   .comp-card-body h4{ margin:0 0 6px; font-size:.98rem; font-weight:800; }
   .comp-card-body p{ margin:0 0 8px; font-size:.86rem; color:var(--navy-soft); }
+  .comp-meta{ display:flex; flex-wrap:wrap; gap:4px 8px; margin:0 0 8px; }
+  .comp-meta span{
+    font-size:.66rem; color:var(--navy-soft); background:var(--cream);
+    border:1px solid var(--line); border-radius:6px; padding:2px 6px; white-space:nowrap;
+  }
+  .comp-meta b{ color:var(--navy); font-weight:700; }
   .platform-tags{ display:flex; flex-wrap:wrap; gap:6px; }
   .platform-tag{
     font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:999px;
@@ -944,7 +946,7 @@
 
     <span class="pill">6.1　代言人策略總覽</span>
     <div class="table-wrap">
-      <table>
+      <table class="endorser-table">
         <thead><tr><th>遊戲</th><th>代言人</th><th>類型</th><th>備註</th></tr></thead>
         <tbody>
           <tr><td>NBA籃球大師</td><td><strong>Klay Thompson</strong></td><td>現役NBA球星本人代言</td><td></td></tr>
@@ -1053,6 +1055,7 @@
         <div class="comp-card-body">
           <h4>🏀 灌籃高手SLAM DUNK手遊</h4>
           <p>品類龍頭，累計營收$1.01億，動漫IP改編</p>
+          <div class="comp-meta"><span>發行：<b>DeNA／Tadpole</b></span><span>年份：<b>2020</b></span><span>M1：<b>45.7萬下載／$117萬</b></span></div>
           <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
         </div>
       </div>
@@ -1061,6 +1064,7 @@
         <div class="comp-card-body">
           <h4>🌟 全明星街球派對</h4>
           <p>林書豪代言，NBA正版授權，近期營收仍在成長</p>
+          <div class="comp-meta"><span>發行：<b>龍邑→艾肯娛樂</b></span><span>年份：<b>2024</b></span><span>M1：<b>38.2萬下載／$250萬</b></span></div>
           <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
         </div>
       </div>
@@ -1069,6 +1073,7 @@
         <div class="comp-card-body">
           <h4>🔥 黑子的籃球Street Rivals</h4>
           <p>台灣暢銷榜曾衝到第3、香港第1</p>
+          <div class="comp-meta"><span>發行：<b>FIVECROSS(5X Games)</b></span><span>年份：<b>2024</b></span><span>M1：<b>12.1萬下載／$97萬</b></span></div>
           <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
         </div>
       </div>
@@ -1077,6 +1082,7 @@
         <div class="comp-card-body">
           <h4>⚔️ 超時空街球對決</h4>
           <p>2026/05剛上市，歷史武將題材，早期表現不錯</p>
+          <div class="comp-meta"><span>發行：<b>LMD Games</b></span><span>年份：<b>2026</b></span><span>M1：<b>9.2萬下載／$101萬</b></span></div>
           <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
         </div>
       </div>
@@ -1085,6 +1091,7 @@
         <div class="comp-card-body">
           <h4>🏆 NBA巔峰對決</h4>
           <p>2025/10上市新作，起步營收佳</p>
+          <div class="comp-meta"><span>發行：<b>未公開(NBA授權)</b></span><span>年份：<b>2025</b></span><span>M1：<b>22.5萬下載／$112萬</b></span></div>
           <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
         </div>
       </div>
@@ -1093,6 +1100,7 @@
         <div class="comp-card-body">
           <h4>📱 NBA 2K Mobile</h4>
           <p>老牌NBA授權手遊，近期成長中</p>
+          <div class="comp-meta"><span>發行：<b>2K（Visual Concepts）</b></span><span>年份：<b>約2018</b></span><span>M1：<b>3.4萬下載／$1.4萬</b></span></div>
           <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
         </div>
       </div>
@@ -1101,6 +1109,7 @@
         <div class="comp-card-body">
           <h4>🆕 FREE DUNK（自由灌籃）</h4>
           <p>2026/01在台上市，與台灣大哥大/富邦勇士合作</p>
+          <div class="comp-meta"><span>發行：<b>待查證</b></span><span>年份：<b>2026</b></span><span>M1：<b>資料尚未取得</b></span></div>
           <div class="platform-tags"><span class="platform-tag">PC（Steam）</span></div>
         </div>
       </div>
@@ -1113,6 +1122,7 @@
         <div class="comp-card-body">
           <h4>🕹️ 3on3 FreeStyle / Rebound</h4>
           <p>PC/主機端，JoyCity官方持續營運</p>
+          <div class="comp-meta"><span>發行：<b>JOYCITY</b></span><span>年份：<b>待查證</b></span><span>M1：<b>不適用(主機/PC)</b></span></div>
           <div class="platform-tags"><span class="platform-tag">PS4/PS5</span><span class="platform-tag">PC</span><span class="platform-tag">Xbox</span><span class="platform-tag">Epic</span></div>
         </div>
       </div>
@@ -1121,6 +1131,7 @@
         <div class="comp-card-body">
           <h4>🎮 Streetball Allstar</h4>
           <p>規模小但仍有活動</p>
+          <div class="comp-meta"><span>發行：<b>待查證</b></span><span>年份：<b>待查證</b></span><span>M1：<b>近乎0下載／$0.02萬</b></span></div>
           <div class="platform-tags"><span class="platform-tag">iOS</span><span class="platform-tag">Android</span></div>
         </div>
       </div>
@@ -1129,6 +1140,7 @@
         <div class="comp-card-body">
           <h4>🏟️ NBA 2K系列（主機/PC）</h4>
           <p>2K官方持續每年推新作</p>
+          <div class="comp-meta"><span>發行：<b>2K（Visual Concepts）</b></span><span>年份：<b>每年新作</b></span><span>M1：<b>不適用(主機/PC)</b></span></div>
           <div class="platform-tags"><span class="platform-tag">PS</span><span class="platform-tag">Xbox</span><span class="platform-tag">PC</span><span class="platform-tag">Switch</span></div>
         </div>
       </div>
@@ -1145,6 +1157,12 @@
     <p class="lead">以下數字是根據前面章節的同類型歷史案例反推的估算區間，不是保證，僅供進場決策的參考基準。</p>
 
     <span class="pill">9.1　營運數據預估</span>
+    <div class="scoreboard">
+      <div class="score-card"><div class="num">8-15萬</div><div class="label">首月(M1)預估下載</div></div>
+      <div class="score-card"><div class="num">$50-120萬</div><div class="label">首月(M1)預估營收</div></div>
+      <div class="score-card"><div class="num">$150-800萬</div><div class="label">首年(Y1)預估營收・無強力IP</div></div>
+      <div class="score-card"><div class="num">$5,000萬+</div><div class="label">首年(Y1)預估營收・頂級國民IP</div></div>
+    </div>
     <div class="table-wrap">
       <table>
         <thead><tr><th>階段</th><th>預估區間</th><th>參考依據</th></tr></thead>
@@ -1367,6 +1385,18 @@ const marketValues = [0.214, 0.208, 0.199, 0.192, 0.159, 0.081, 0.094, 0.11, 0.0
         backgroundColor: rpdData.map(d=> typeColor[d[2]]), borderRadius:6 }] },
       options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
         scales:{ x:{ title:{display:true,text:'美元'}, grid:{color:lineColor} }, y:{ ticks:{autoSkip:false}, grid:{display:false} } } }
+    });
+  }
+
+  const ctx7b = document.getElementById('regionRpdChart');
+  if (ctx7b) {
+    const regionRpdData = [ ['台灣',12.0], ['澳門',19.9], ['香港',30.8] ];
+    new Chart(ctx7b, {
+      type: 'bar',
+      data: { labels: regionRpdData.map(d=>d[0]), datasets: [{ label: '整體RPD（美元/次下載）', data: regionRpdData.map(d=>d[1]),
+        backgroundColor: [orangeColor, navyColor, pinkColor], borderRadius: 8 }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+        scales: { y: { title: { display: true, text: '美元' }, grid: { color: lineColor } }, x: { grid: { display: false } } } }
     });
   }
 
