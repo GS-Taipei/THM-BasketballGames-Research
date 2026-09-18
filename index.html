@@ -23,8 +23,8 @@
     --line:#EAD9BE;
   }
   /* 分頁色彩分組：一致規則 — 前言(一二)=橘｜代理與數據(三四)=粉｜受眾與文化(五六七)=黃｜結論(八)=深藍 */
-  section#s1, section#s2 { --group:var(--orange); --group-text:#FFFFFF; }
-  section#s3, section#s4 { --group:var(--pink);   --group-text:#FFFFFF; }
+  section#s1, section#s2, section#s3 { --group:#9CA3AF; --group-text:#FFFFFF; }
+  section#s4 { --group:var(--pink);   --group-text:#FFFFFF; }
   section#s5, section#s6, section#s7, section#s8 { --group:var(--yellow); --group-text:var(--navy); }
   section#s9 { --group:var(--navy);  --group-text:#FFFFFF; }
 
@@ -80,10 +80,16 @@
   .tab-btn:hover{ transform:translateY(-2px); }
   .tab-btn.active{ color:var(--white); }
   .tab-btn.active .num{ background:var(--navy); }
-  .tab-btn:nth-child(1).active, .tab-btn:nth-child(2).active{
-    background:var(--orange); border-color:var(--orange);
+  .tab-btn:nth-child(1), .tab-btn:nth-child(2), .tab-btn:nth-child(3){
+    color:#9CA3AF; border-color:#D1D5DB;
   }
-  .tab-btn:nth-child(3).active, .tab-btn:nth-child(4).active{
+  .tab-btn:nth-child(1) .num, .tab-btn:nth-child(2) .num, .tab-btn:nth-child(3) .num{
+    background:#9CA3AF;
+  }
+  .tab-btn:nth-child(1).active, .tab-btn:nth-child(2).active, .tab-btn:nth-child(3).active{
+    background:#9CA3AF; border-color:#9CA3AF; color:#fff;
+  }
+  .tab-btn:nth-child(4).active{
     background:var(--pink); border-color:var(--pink);
   }
   .tab-btn:nth-child(5).active, .tab-btn:nth-child(6).active, .tab-btn:nth-child(7).active, .tab-btn:nth-child(8).active{
@@ -298,15 +304,26 @@
   .chart-footnote b{ color:var(--navy); }
 
   /* ---------- 表格凍結首欄／首列 ---------- */
-  .sticky-table thead th{ position:sticky; top:100px; z-index:8; background:var(--navy); }
+  /* 表格自帶垂直捲軸容器，讓sticky thead真正生效，預設只顯示約9.5列 */
+  .table-wrap.scroll-body{
+    max-height:420px; overflow-y:auto; overflow-x:auto;
+    border-radius:16px;
+  }
+  .table-wrap.scroll-body table{ border-radius:0; }
+  .sticky-table thead th{ position:sticky; top:0; z-index:8; }
   .sticky-table tbody td:first-child{
     position:sticky; left:0; z-index:4;
     background:var(--white); box-shadow:2px 0 4px rgba(20,33,61,.08);
   }
   .sticky-table tbody tr:nth-child(even) td:first-child{ background:#FFFBF3; }
   .sticky-table tbody tr:hover td:first-child{ background:#FFF1DC; }
-  .sticky-table thead th:first-child{ position:sticky; left:0; top:100px; z-index:12; background:var(--navy); }
-  .sticky-table thead th:first-child{ z-index:6; }
+  .sticky-table thead th:first-child{ position:sticky; left:0; top:0; z-index:12; }
+  /* 表頭欄位依資料類型分色 */
+  .sticky-table thead th.col-dl{ background:#2E5B8A; }
+  .sticky-table thead th.col-rev{ background:#B4488A; }
+  .sticky-table thead th.col-plat{ background:#B87A2E; }
+  .sticky-table thead th.col-region{ background:#3D8C6B; }
+  .sticky-table thead th:first-child{ background:var(--navy); }
 
   /* ---------- 自訂籃球游標（點15） ---------- */
   body{
@@ -769,9 +786,18 @@
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">📱 4.5　雙平台與台港澳地區拆分總表</h3>
-    <div class="table-wrap data-table-tight">
+    <div class="table-wrap scroll-body data-table-tight">
       <table class="sticky-table">
-        <thead><tr><th>遊戲</th><th>M1下載</th><th>M1營收</th><th>M3下載</th><th>M3營收</th><th>M6下載</th><th>M6營收</th><th>Y1下載</th><th>Y1營收</th><th>iOS下載%</th><th>Android下載%</th><th>iOS營收%</th><th>Android營收%</th><th>台灣%</th><th>香港%</th><th>澳門%</th></tr></thead>
+        <thead><tr>
+          <th>遊戲</th>
+          <th class="col-dl">M1下載</th><th class="col-rev">M1營收</th>
+          <th class="col-dl">M3下載</th><th class="col-rev">M3營收</th>
+          <th class="col-dl">M6下載</th><th class="col-rev">M6營收</th>
+          <th class="col-dl">Y1下載</th><th class="col-rev">Y1營收</th>
+          <th class="col-plat">iOS下載%</th><th class="col-plat">Android下載%</th>
+          <th class="col-plat">iOS營收%</th><th class="col-plat">Android營收%</th>
+          <th class="col-region">台灣%</th><th class="col-region">香港%</th><th class="col-region">澳門%</th>
+        </tr></thead>
         <tbody>
           <tr><td>灌籃高手手遊</td><td>45.7萬</td><td>$117萬</td><td>140萬</td><td>$1,719萬</td><td>166萬</td><td>$3,805萬</td><td>192萬</td><td>$5,920萬</td><td>52.2%</td><td>47.8%</td><td>66.7%</td><td>33.3%</td><td>82.4%</td><td>17.0%</td><td>0.6%</td></tr>
           <tr><td>全明星街球派對</td><td>38.2萬</td><td>$250萬</td><td>62万</td><td>$671萬</td><td>78萬</td><td>$1,139萬</td><td>95万</td><td>$1,564萬</td><td>59.2%</td><td>40.8%</td><td>81.6%</td><td>18.4%</td><td>80.5%</td><td>18.9%</td><td>0.6%</td></tr>
@@ -790,13 +816,19 @@
         </tbody>
       </table>
     </div>
+    <div class="type-legend">
+      <span><i style="background:#2E5B8A;"></i>下載</span>
+      <span><i style="background:#B4488A;"></i>營收</span>
+      <span><i style="background:#B87A2E;"></i>平台佔比</span>
+      <span><i style="background:#3D8C6B;"></i>地區佔比</span>
+    </div>
     <div class="callout">
       <div class="icon">🔍</div>
       <p><strong>關鍵發現：</strong>動漫IP驅動的作品(灌籃高手、黑子的籃球、街頭籃球2024)下載量在M6之後只再成長7-18%，代表首波聲量已經在前半年打完，後面進入平緩期；但NBA正版授權的手遊獨立產品線(NBA2K Mobile、EA NBA LIVE Mobile、籃下王者、NBA籃球大師)恰恰相反，因為會搭上真實生活中長期的球季，因此M6到Y1這半年下載量暴增76%到289%，營收更是翻倍以上。</p>
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">💸 4.6　課金強度隨時間拉高，不是首抽衝高</h3>
-    <p>把14款遊戲全部列出來比較「下載量成長倍數」和「營收成長倍數」（皆以首月M1為基準）：</p>
+    <p>把11款遊戲列出來比較「下載量成長倍數」和「營收成長倍數」（皆以首月M1為基準）——EA NBA LIVE Mobile、Streetball Allstar、籃下王者三款因為首月基期趨近於零，倍數被異常放大到幾百倍甚至上萬倍，數字太極端會扭曲判讀，這裡先移除，只看有代表性的11款：</p>
     <div class="table-wrap data-table-tight">
       <table>
         <thead><tr><th>遊戲</th><th>首月RPD</th><th>首月後RPD</th><th>首月後下載成長倍數</th><th>首月後營收成長倍數</th></tr></thead>
@@ -812,15 +844,12 @@
           <tr><td>美職籃籃球世界</td><td>$3.1</td><td>$15.7</td><td>1.4倍</td><td style="font-weight:800;color:var(--pink);">3.0倍</td></tr>
           <tr><td>NBA王朝崛起</td><td>$5.7</td><td>$12.3</td><td>1.5倍</td><td style="font-weight:800;color:var(--pink);">2.1倍</td></tr>
           <tr><td>超時空街球對決</td><td>$11.0</td><td>$55.4</td><td>1.2倍</td><td style="font-weight:800;color:var(--pink);">1.8倍</td></tr>
-          <tr><td>籃下王者</td><td>$2.4</td><td>$3.1</td><td>675.7倍</td><td style="font-weight:800;color:var(--pink);">890.9倍</td></tr>
-          <tr><td>EA NBA LIVE Mobile</td><td>$0.1</td><td>$2.6</td><td>2,127.6倍</td><td style="font-weight:800;color:var(--pink);">47,754.1倍</td></tr>
-          <tr><td>Streetball Allstar</td><td>$0</td><td>$8.2</td><td>—</td><td style="font-weight:800;color:var(--pink);">7,895.4倍</td></tr>
         </tbody>
       </table>
     </div>
     <div class="callout blue">
       <div class="icon">📐</div>
-      <p><strong>留存比新下載重要：</strong>如果新增下載是營收成長的主因，兩個倍數應該接近；但14款遊戲<strong>無一例外</strong>營收成長倍數都遠高於下載成長倍數——例如全明星街球派對下載只成長3.3倍，營收卻成長9.6倍；黑子的籃球下載成長2.6倍，營收成長9.0倍。這代表同一批M1就已經下載的玩家，之後貢獻了遠超過新增下載能解釋的營收成長，也就是留存下來的舊玩家持續加碼課金，而不是靠源源不絕的新玩家撐營收。（*** EA NBA LIVE Mobile、Streetball Allstar、籃下王者三款因M1基期趨近於零，倍數被異常放大，僅供參考、不適合當代表案例）</p>
+      <p><strong>留存比新下載重要：</strong>如果新增下載是營收成長的主因，兩個倍數應該接近；但11款遊戲<strong>無一例外</strong>營收成長倍數都遠高於下載成長倍數——例如全明星街球派對下載只成長3.3倍，營收卻成長9.6倍；黑子的籃球下載成長2.6倍，營收成長9.0倍。這代表同一批M1就已經下載的玩家，之後貢獻了遠超過新增下載能解釋的營收成長，也就是留存下來的舊玩家持續加碼課金，而不是靠源源不絕的新玩家撐營收。</p>
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">🎭 4.7　有無IP，變現效率差多少？</h3>
@@ -844,20 +873,20 @@
     </div>
 
     <h3 style="font-size:1.1rem;margin:30px 0 10px;">🔗 4.8　三方交叉比對：地區、平台、變現效率</h3>
-    <p>把14款遊戲的「香港下載佔比」「iOS下載佔比」「RPD」三個欄位互相算相關係數，看看哪些變數真的有關聯：</p>
+    <p>把14款遊戲的台灣／香港／澳門下載佔比，跟iOS下載佔比、RPD一起算相關係數，看哪些變數真的有關聯（台灣和香港互為消長，數字方向相反是正常的）：</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>交叉比對</th><th>相關係數</th><th>判讀</th></tr></thead>
+        <thead><tr><th>交叉比對</th><th>台灣</th><th>香港</th><th>澳門</th><th>判讀</th></tr></thead>
         <tbody>
-          <tr><td>香港下載佔比 × iOS下載佔比</td><td style="font-weight:800;color:var(--pink);">r = 0.74（強正相關）</td><td>香港佔比越高的遊戲，iOS下載佔比也越高——呼應香港iPhone滲透率普遍高於台灣的既有印象，是三個比對裡唯一夠強、可以直接拿來用的訊號</td></tr>
-          <tr><td>香港下載佔比 × RPD</td><td>r = -0.13（幾乎無關）</td><td>香港玩家佔比高低，跟這款遊戲的變現效率沒有明顯關係，不能用「香港玩家多＝比較會課金」來推論</td></tr>
-          <tr><td>iOS下載佔比 × RPD</td><td>r = 0.02（無關）</td><td>單純iOS佔比高，不代表這款遊戲的整體變現效率就比較好——iOS用戶雖然人均貢獻營收較高（見4.5節），但這是「同一款遊戲內」iOS比Android會花錢，不是「iOS佔比越高的遊戲」整體RPD越高，兩者是不同層次的事</td></tr>
+          <tr><td>地區佔比 × iOS下載佔比</td><td>r = -0.73（強負相關）</td><td style="font-weight:800;color:var(--pink);">r = 0.74（強正相關）</td><td>r = 0.41（中度正相關）</td><td>香港佔比越高，iOS下載佔比也越高，台灣則相反——呼應香港iPhone滲透率普遍高於台灣的既有印象；澳門樣本數太小（多數不到1%），可信度較低</td></tr>
+          <tr><td>地區佔比 × RPD</td><td>r = 0.14（無關）</td><td>r = -0.13（無關）</td><td>r = -0.17（無關）</td><td>三個地區的佔比高低，都跟這款遊戲的整體變現效率沒有明顯關係</td></tr>
         </tbody>
       </table>
     </div>
+    <p>再把iOS下載佔比單獨拿出來對RPD算一次：<strong>r = 0.02（無關）</strong>——單純iOS佔比高，不代表整體變現效率就比較好，這是「同一款遊戲內」iOS比Android會花錢（見4.5節），跟「iOS佔比越高的遊戲」整體RPD越高，是不同層次的事。</p>
     <div class="callout blue">
       <div class="icon">🎯</div>
-      <p><strong>實務意義：</strong>如果新遊戲鎖定香港做重點市場，可以直接把iOS當成主力投放平台（r=0.74的訊號夠強）；但不要誤以為「衝香港佔比」或「衝iOS佔比」就能直接拉高變現效率，這兩者跟RPD都沒有關聯，變現效率主要還是取決於第4.7節講的「有沒有對的IP」。</p>
+      <p><strong>實務意義：</strong>地區佔比（不管台灣、香港還是澳門）都跟變現效率沒有關聯——變現效率主要取決於第4.7節講的「有沒有對的IP」，不是玩家來自哪個地區。但地區佔比能預測平台選擇：鎖定香港做重點市場，可以直接把iOS當主力投放平台；鎖定台灣則Android的權重要拉高。想看「地區×變現效率」更直接的關聯，見第七節「三地RPD比較」——那裡看的是每個地區自己的人均消費力，跟這裡「佔比高低」是不同角度，答案也不一樣。</p>
     </div>
   </section>
 
@@ -968,7 +997,23 @@
       <h2>跨地區（台港澳）比較</h2>
     </div>
 
-    <span class="pill">7.1　14款遊戲的地區下載佔比——誰在香港特別受歡迎？</span>
+    <span class="pill">7.1　三地變現效率比較——香港玩家人均貢獻是台灣的2.5倍</span>
+    <p>把14款遊戲的營收和下載量依地區加總，算出每個地區自己的整體RPD——這裡看的是「每個地區自己人均花多少」，跟第四節4.8「地區佔比高低」是不同角度：</p>
+    <div class="chart-box">
+      <h4>台／港／澳　整體RPD（每次下載營收）比較</h4>
+      <canvas id="regionRpdChart"></canvas>
+    </div>
+    <div class="stat-strip">
+      <div class="stat-chip"><div class="n">$30.8</div><div class="t">香港整體RPD，三地最高</div></div>
+      <div class="stat-chip"><div class="n">$19.9</div><div class="t">澳門整體RPD，居中</div></div>
+      <div class="stat-chip"><div class="n">$12.0</div><div class="t">台灣整體RPD，三地最低</div></div>
+    </div>
+    <div class="callout blue">
+      <div class="icon">💰</div>
+      <p><strong>關鍵發現：</strong>香港玩家的人均消費力是台灣玩家的<strong>2.5倍以上</strong>，澳門也比台灣高出6成。台灣雖然貢獻最多下載量(80%+)，但單一玩家的付費力道是三地最弱的；換句話說，台灣負責衝量，香港負責衝營收密度。目標是衝下載/知名度，台灣是主戰場；目標是衝營收效率，香港值得投入不成比例的行銷資源。</p>
+    </div>
+
+    <span class="pill">7.2　14款遊戲的地區下載佔比——誰在香港特別受歡迎？</span>
     <p>把代表性遊戲的下載量拆成台/港/澳三地佔比，可以看出誰的地區組合跟平均值明顯不一樣(完整數字可參考4.5表格)：</p>
     <div class="chart-box">
       <h4>台／港／澳 下載佔比比較（代表性6款）</h4>
@@ -979,16 +1024,16 @@
       <p><strong>值得深挖的發現：</strong>「正規NBA授權」類型的作品香港佔比明顯高於「動漫IP/街籃系」(NBA-29% vs IP-13%)，而「動漫IP/街籃系」作品台灣佔比反而高(NBA-70% vs IP-86%)。這代表新遊戲進場時，產品類型跟主打地區應該分開規劃，而不是三地用同一套行銷素材打天下。</p>
     </div>
 
-    <span class="pill">7.2　澳門：規模太小，但不代表不重要</span>
+    <span class="pill">7.3　澳門：規模太小，但不代表不重要</span>
     <p>澳門在每一款遊戲的下載佔比都落在0.1%-1.5%之間，穩定是三地裡最小的市場。以澳門的人口基數(約68萬人)換算，這個佔比其實跟人口比例大致相符，代表澳門玩家的參與度並不冷淡，只是市場規模天生受限。新遊戲進場時，澳門大概率只能搭港澳同服的順風車，不值得單獨投入行銷資源。</p>
 
-    <span class="pill">7.3　街頭籃球文化的在地轉譯</span>
+    <span class="pill">7.4　街頭籃球文化的在地轉譯</span>
     <p>街頭籃球源於美國黑人社區文化，經韓國JOYCITY改編為《FreeStyle》的3D卡通塗鴉風格，再引進台港澳，中間至少經過兩層文化轉譯：美國街頭文化 → 韓國電玩美學 → 台港澳在地化（繁中配音、本土球星代言、夜市快閃活動）。建議透過深度訪談重度玩家搭配內容分析進一步探討。</p>
 
-    <span class="pill">7.4　世代差異：電子遊藝機台 vs. 數位遊戲</span>
+    <span class="pill">7.5　世代差異：電子遊藝機台 vs. 數位遊戲</span>
     <p>投籃機作為老一輩共同記憶，與手遊/端遊分屬不同世代的籃球遊戲入口，50歲以上與20歲以下族群對籃球遊戲的認知與消費行為可能有本質差異，建議透過世代分層問卷或焦點團體訪談進一步驗證。</p>
 
-    <span class="pill">7.5　仍待補的地區差異</span>
+    <span class="pill">7.6　仍待補的地區差異</span>
     <p>目前拿到的都是下載/營收這種行為數據，還缺兩塊：語言偏好（港澳玩家是否需要粵語配音，目前查到的作品幾乎都只做國語配音）和社群活躍度（同一款遊戲在台、港、澳的官方社群互動熱度差異）。這兩塊需要另外抓Facebook粉專/Discord的地區留言資料，或做跨地區問卷補齊。</p>
   </section>
 
